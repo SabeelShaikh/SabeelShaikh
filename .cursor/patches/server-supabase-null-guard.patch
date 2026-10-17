@@ -1,0 +1,14 @@
+--- a/server/supabase.js
++++ b/server/supabase.js
+@@ -64,8 +64,9 @@
+         .select()
+         .order('id', { ascending: true })
+ 
+-    if (productsError) {
+-        console.error('Error fetching products:', productsError.message);
++    if (productsError || !products) {
++        console.error('Error fetching products:', productsError?.message ?? 'no data');
++        return [];
+     }
+ 
+     // 2. Create an array of promises to fetch images concurrently
